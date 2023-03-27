@@ -9,6 +9,7 @@ import 'package:qbidding/core/widget/body.dart';
 import 'package:qbidding/core/widget/button.dart';
 import 'package:qbidding/core/widget/text.dart';
 import 'package:qbidding/core/widget/text_field.dart';
+import 'package:qbidding/features/app/domain/repositories/api_repo.dart';
 import 'package:qbidding/features/app/presentation/login/bloc/login_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -24,7 +25,8 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginBloc(getIt<IFlutterNavigator>()),
+      create: (context) =>
+          LoginBloc(getIt<IFlutterNavigator>(), getIt<ApiRepo>()),
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
           final size = MediaQuery.of(context).size;
@@ -89,6 +91,7 @@ class LoginScreen extends StatelessWidget {
                     heigh: 55,
                     text: "Log In",
                     fontSize: 16,
+                    loading: state.loading,
                     fontWeight: FontWeight.w600,
                     textColor: bWhite,
                     press: () {

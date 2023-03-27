@@ -5,13 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qbidding/core/form_validator/validator.dart';
 import 'package:qbidding/core/navigator/iflutter_navigator.dart';
 import 'package:qbidding/core/utils/enums.dart';
+import 'package:qbidding/features/app/domain/repositories/api_repo.dart';
 import 'package:qbidding/features/app/presentation/register/view/register_first_screen.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc(this._iFlutterNavigator) : super(LoginInitial()) {
+  LoginBloc(this._iFlutterNavigator, this._apiRepo) : super(LoginInitial()) {
     on<ChangeMobile>(_changeMobile);
     on<ChangePassword>(_changePassword);
     on<GoToRegisterFirstScreen>(_goToRegisterFirstScreen);
@@ -20,6 +21,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   final IFlutterNavigator _iFlutterNavigator;
+  final ApiRepo _apiRepo;
 
   FutureOr<void> _changeMobile(ChangeMobile event, Emitter<LoginState> emit) {
     emit(state.copyWith(mobile: event.mobile));
@@ -31,7 +33,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   FutureOr<void> _pressToLogIn(PressToLogIn event, Emitter<LoginState> emit) {
-    if (isValid(event)) {
+    if (isValid(event) && !state.loading) {
+      emit(state.copyWith(loading: true));
+      //final login = _apiRepo.post(endpoint: loginEndpoint, responseModel: responseModel)
     } else {
       emit(state.copyWith(forms: Forms.invalid));
     }

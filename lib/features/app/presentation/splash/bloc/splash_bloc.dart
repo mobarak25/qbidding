@@ -3,22 +3,24 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:qbidding/core/navigator/iflutter_navigator.dart';
+import 'package:qbidding/features/app/domain/repositories/local_storage_repo.dart';
 import 'package:qbidding/features/app/presentation/login/view/login_screen.dart';
 
 part 'splash_event.dart';
 part 'splash_state.dart';
 
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
-  SplashBloc(this._iFlutterNavigator) : super(SplashInitial()) {
-    on<GoToLoginScreen>(_goToLoginScreen);
+  SplashBloc(this._iFlutterNavigator, this._localStorageRepo)
+      : super(SplashInitial()) {
+    on<CheckLogedIn>(_checkLogedIn);
 
-    add(GoToLoginScreen());
+    add(CheckLogedIn());
   }
 
   final IFlutterNavigator _iFlutterNavigator;
+  final LocalStorageRepo _localStorageRepo;
 
-  FutureOr<void> _goToLoginScreen(
-      GoToLoginScreen event, Emitter<SplashState> emit) {
+  FutureOr<void> _checkLogedIn(CheckLogedIn event, Emitter<SplashState> emit) {
     Timer(const Duration(seconds: 2), () {
       _iFlutterNavigator.pushReplacement(LoginScreen.route());
     });

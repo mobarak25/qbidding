@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:qbidding/core/ioc/global.dart';
 import 'package:qbidding/core/navigator/iflutter_navigator.dart';
 import 'package:qbidding/features/app/presentation/splash/view/splash_screen.dart';
 
 void main() {
   configureDependencies();
+  initGetStorage();
   runApp(const MyApp());
 }
 
@@ -21,4 +23,8 @@ class MyApp extends StatelessWidget {
       navigatorKey: getIt<IFlutterNavigator>().navigatorKey,
     );
   }
+}
+
+Future<void> initGetStorage() async {
+  await GetStorage.init();
 }

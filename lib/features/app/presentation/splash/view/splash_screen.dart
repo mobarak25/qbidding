@@ -6,6 +6,7 @@ import 'package:qbidding/core/utils/asset_image.dart';
 import 'package:qbidding/core/utils/colors.dart';
 import 'package:qbidding/core/widget/body.dart';
 import 'package:qbidding/core/widget/text.dart';
+import 'package:qbidding/features/app/domain/repositories/local_storage_repo.dart';
 import 'package:qbidding/features/app/presentation/splash/bloc/splash_bloc.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -14,7 +15,8 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => SplashBloc(getIt<IFlutterNavigator>()),
+      create: (_) =>
+          SplashBloc(getIt<IFlutterNavigator>(), getIt<LocalStorageRepo>()),
       child: BlocBuilder<SplashBloc, SplashState>(
         builder: (context, state) {
           final size = MediaQuery.of(context).size;
