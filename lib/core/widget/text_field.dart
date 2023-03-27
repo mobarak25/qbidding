@@ -4,28 +4,12 @@ import 'package:qbidding/core/utils/text_styles.dart';
 import 'package:qbidding/core/widget/text.dart';
 
 class TextFieldB extends StatefulWidget {
-  final String? hintText, fieldTitle, labelText, errorText, helperText;
-  final double? paddingHeight, paddingWidth, height;
-  final TextStyle? textStyle;
-  final bool? isAccountType, isReadOnly;
-  final Widget? suffixIcon;
-  final int? maxLines;
-  final int? maxLength;
-  final TextEditingController? controller;
-  final FocusNode focusNode;
-  final bool obscureText;
-  final TextInputType? textInputType;
-  final TextAlign? textAlign;
-  final VoidCallback? onTouch;
-  final Function onChanged;
-  final Color? bgColor, hintColor;
-  final bool isMandatory;
-
   const TextFieldB(
       {Key? key,
       this.hintText = "",
       this.fieldTitle = "",
-      this.textStyle = bStyle,
+      this.textStyle = const TextStyle(
+          fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black),
       this.labelText,
       this.errorText = '',
       this.helperText = '',
@@ -48,6 +32,23 @@ class TextFieldB extends StatefulWidget {
       this.isMandatory = false,
       this.hintColor})
       : super(key: key);
+
+  final String? hintText, fieldTitle, labelText, errorText, helperText;
+  final double? paddingHeight, paddingWidth, height;
+  final TextStyle? textStyle;
+  final bool? isAccountType, isReadOnly;
+  final Widget? suffixIcon;
+  final int? maxLines;
+  final int? maxLength;
+  final TextEditingController? controller;
+  final FocusNode focusNode;
+  final bool obscureText;
+  final TextInputType? textInputType;
+  final TextAlign? textAlign;
+  final VoidCallback? onTouch;
+  final Function onChanged;
+  final Color? bgColor, hintColor;
+  final bool isMandatory;
 
   @override
   State<StatefulWidget> createState() {
@@ -87,17 +88,12 @@ class _TextField extends State<TextFieldB> {
         Container(
           height: widget.height,
           decoration: BoxDecoration(
-            boxShadow: widget.focusNode.hasFocus && widget.isAccountType!
+            boxShadow: widget.focusNode.hasFocus
                 ? [
                     BoxShadow(
-                      color: const Color(0XFF000000).withOpacity(0.18),
-                      offset: const Offset(5, 5), //(x,y)
-                      blurRadius: 7,
-                    ),
-                    BoxShadow(
-                      color: const Color(0XFFFFFFFF).withOpacity(0.18),
-                      offset: const Offset(-3, -5), //(x,y)
-                      blurRadius: 12,
+                      color: const Color(0XFF6673F5).withOpacity(0.2),
+                      offset: const Offset(0, 4), //(x,y)
+                      blurRadius: 10,
                     )
                   ]
                 : null,
@@ -127,17 +123,17 @@ class _TextField extends State<TextFieldB> {
               ),
               suffixIcon: widget.suffixIcon,
               labelText: widget.labelText,
-              labelStyle: const TextStyle(color: bGray, fontSize: 14),
+              labelStyle: const TextStyle(color: bDarkGray, fontSize: 16),
               hintText: widget.hintText!,
               hintStyle: TextStyle(color: widget.hintColor),
-              fillColor: widget.focusNode.hasFocus && widget.isAccountType!
-                  ? const Color(0XFFF2F2F2)
-                  : widget.bgColor ?? Colors.white,
+              fillColor: widget.focusNode.hasFocus ||
+                      widget.controller != null &&
+                          widget.controller!.text.isNotEmpty
+                  ? Colors.white
+                  : widget.bgColor ?? const Color(0XFFEFEFEF),
               filled: true,
               focusedBorder: OutlineInputBorder(
-                borderSide: widget.isAccountType!
-                    ? const BorderSide(color: Colors.transparent)
-                    : const BorderSide(color: bGray),
+                borderSide: const BorderSide(color: bExtraLightBlue),
                 borderRadius: BorderRadius.circular(7),
               ),
               enabledBorder: OutlineInputBorder(

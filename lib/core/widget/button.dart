@@ -5,7 +5,7 @@ import 'text.dart';
 class ButtonB extends StatelessWidget {
   final String? text;
   final Color? textColor;
-  final Color bgColor, borderColor;
+  final Color borderColor;
   final double? heigh;
   final bool? shadow;
   final double? fontSize;
@@ -19,7 +19,6 @@ class ButtonB extends StatelessWidget {
       {Key? key,
       required this.text,
       this.textColor = bDark,
-      this.bgColor = bDarkBlue,
       this.borderColor = Colors.transparent,
       this.heigh = 45,
       this.shadow = false,
@@ -36,13 +35,16 @@ class ButtonB extends StatelessWidget {
     return Material(
       child: InkWell(
         onTap: press,
-        borderRadius: BorderRadius.circular(7),
+        borderRadius: BorderRadius.circular(10),
         child: Ink(
           height: heigh,
           padding: EdgeInsets.symmetric(horizontal: horizontalPadding ?? 10),
           decoration: BoxDecoration(
-            color: bgColor,
-            borderRadius: BorderRadius.circular(7),
+            gradient: const LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Color(0XFF6673F5), Color(0XFF424FF8)]),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: borderColor),
             boxShadow: shadow!
                 ? const [

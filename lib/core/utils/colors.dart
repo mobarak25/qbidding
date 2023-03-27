@@ -9,3 +9,4 @@ const bDark = Color(0xFF050611);
 const bDarkGray = Color(0xFF767782);
 const bGray = Color(0xFF9D9EA6);
 const bExtraLightGray = Color(0xFFD9D8DB);
+const bWhite = Color(0xFFFFFFFF);

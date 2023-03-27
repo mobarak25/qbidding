@@ -19,7 +19,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   FutureOr<void> _goToLoginScreen(
       GoToLoginScreen event, Emitter<SplashState> emit) {
-    Timer(const Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 2), () {
       _iFlutterNavigator.pushReplacement(LoginScreen.route());
     });
   }
