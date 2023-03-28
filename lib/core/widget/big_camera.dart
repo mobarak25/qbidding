@@ -5,11 +5,15 @@ import 'package:qbidding/core/widget/text.dart';
 
 class BigCamera extends StatelessWidget {
   const BigCamera(
-      {Key? key, required this.press, this.tittle = '', this.errorText = ''})
+      {Key? key,
+      required this.press,
+      this.tittle = '',
+      this.subtitle = '',
+      this.errorText = ''})
       : super(key: key);
 
   final VoidCallback press;
-  final String tittle;
+  final String tittle, subtitle;
   final String errorText;
 
   @override
@@ -17,14 +21,6 @@ class BigCamera extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (tittle != '')
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: TextB(
-              text: tittle,
-            ),
-          ),
-        const SizedBox(height: 5),
         Material(
           color: const Color(0XFFEFEFEF),
           borderRadius: BorderRadius.circular(10),
@@ -43,13 +39,13 @@ class BigCamera extends StatelessWidget {
                 children: [
                   Image.asset(vactorImagePng),
                   const SizedBox(height: 7),
-                  const TextB(
-                    text: "Upload NID",
+                  TextB(
+                    text: tittle,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
-                  const TextB(
-                    text: "Upload national identity card",
+                  TextB(
+                    text: subtitle,
                     fontSize: 14,
                     fontColor: bDarkGray,
                   ),

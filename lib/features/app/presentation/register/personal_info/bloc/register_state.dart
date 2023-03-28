@@ -1,7 +1,7 @@
-part of 'register_first_bloc.dart';
+part of 'register_bloc.dart';
 
-class RegisterFirstState extends Equatable {
-  const RegisterFirstState({
+class PersonalInfoState extends Equatable {
+  const PersonalInfoState({
     this.forms = Forms.initial,
     this.name = '',
     this.mobile = '',
@@ -9,12 +9,11 @@ class RegisterFirstState extends Equatable {
     this.password = '',
     this.images = const [],
   });
-
   final Forms forms;
   final String name, mobile, email, password;
   final List<ImageFile> images;
 
-  RegisterFirstState copyWith({
+  PersonalInfoState copyWith({
     Forms? forms,
     String? name,
     String? mobile,
@@ -22,7 +21,7 @@ class RegisterFirstState extends Equatable {
     String? password,
     List<ImageFile>? images,
   }) {
-    return RegisterFirstState(
+    return PersonalInfoState(
       forms: forms ?? this.forms,
       name: name ?? this.name,
       mobile: mobile ?? this.mobile,
@@ -36,4 +35,4 @@ class RegisterFirstState extends Equatable {
   List<Object> get props => [forms, name, mobile, email, password, images];
 }
 
-class RegisterFirstInitial extends RegisterFirstState {}
+class RegisterInitial extends PersonalInfoState {}

@@ -122,6 +122,11 @@ class _TextField extends State<TextFieldB> {
                 vertical: widget.paddingHeight!,
               ),
               suffixIcon: widget.suffixIcon,
+              suffixIconColor: widget.focusNode.hasFocus ||
+                      widget.controller != null &&
+                          widget.controller!.text.isNotEmpty
+                  ? bExtraLightBlue
+                  : bGray,
               labelText: widget.labelText,
               labelStyle: const TextStyle(color: bDarkGray, fontSize: 16),
               hintText: widget.hintText!,

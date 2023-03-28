@@ -1,5 +1,5 @@
 class LogInResponse {
-  LogInResponse({
+  const LogInResponse({
     this.error,
     this.timezone,
     this.timezoneOffset,

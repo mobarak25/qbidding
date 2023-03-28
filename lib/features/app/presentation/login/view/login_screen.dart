@@ -10,6 +10,7 @@ import 'package:qbidding/core/widget/button.dart';
 import 'package:qbidding/core/widget/text.dart';
 import 'package:qbidding/core/widget/text_field.dart';
 import 'package:qbidding/features/app/domain/repositories/api_repo.dart';
+import 'package:qbidding/features/app/domain/repositories/local_storage_repo.dart';
 import 'package:qbidding/features/app/presentation/login/bloc/login_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -25,8 +26,8 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          LoginBloc(getIt<IFlutterNavigator>(), getIt<ApiRepo>()),
+      create: (context) => LoginBloc(getIt<IFlutterNavigator>(),
+          getIt<ApiRepo>(), getIt<LocalStorageRepo>()),
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
           final size = MediaQuery.of(context).size;
@@ -54,10 +55,7 @@ class LoginScreen extends StatelessWidget {
                     },
                     labelText: "Mobile Number",
                     controller: mobileController,
-                    suffixIcon: const Icon(
-                      Icons.settings_phone,
-                      color: bGray,
-                    ),
+                    suffixIcon: const Icon(Icons.settings_phone),
                     errorText:
                         state.forms == Forms.invalid && state.mobile.isEmpty
                             ? 'Enter your mobile number'
@@ -78,8 +76,8 @@ class LoginScreen extends StatelessWidget {
                         bloc.add(IsObscureText());
                       },
                       child: state.isObscureText
-                          ? const Icon(Icons.visibility_off, color: bGray)
-                          : const Icon(Icons.visibility, color: bGray),
+                          ? const Icon(Icons.visibility_off)
+                          : const Icon(Icons.visibility),
                     ),
                     errorText:
                         state.forms == Forms.invalid && state.password.isEmpty

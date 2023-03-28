@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,13 +13,12 @@ import 'package:qbidding/core/widget/button.dart';
 import 'package:qbidding/core/widget/grid_view_file_image.dart';
 import 'package:qbidding/core/widget/text.dart';
 import 'package:qbidding/core/widget/text_field.dart';
+import 'package:qbidding/features/app/presentation/register/personal_info/bloc/register_bloc.dart';
 
-import 'bloc/register_first_bloc.dart';
-
-class RegisterFirstScreen extends StatelessWidget {
-  RegisterFirstScreen({super.key});
+class PersonalInfoScreen extends StatelessWidget {
+  PersonalInfoScreen({super.key});
   static Route<dynamic> route() => MaterialPageRoute<dynamic>(
-        builder: (_) => RegisterFirstScreen(),
+        builder: (_) => PersonalInfoScreen(),
       );
 
   final nameFocusnode = FocusNode();
@@ -35,11 +35,11 @@ class RegisterFirstScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          RegisterFirstBloc(getIt<IFlutterNavigator>(), getIt<ImagePicker>()),
-      child: BlocBuilder<RegisterFirstBloc, RegisterFirstState>(
+          PersonalInfoBloc(getIt<IFlutterNavigator>(), getIt<ImagePicker>()),
+      child: BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
         builder: (context, state) {
           final size = MediaQuery.of(context).size;
-          final bloc = context.read<RegisterFirstBloc>();
+          final bloc = context.read<PersonalInfoBloc>();
 
           return Body(
             child: SingleChildScrollView(
@@ -114,6 +114,8 @@ class RegisterFirstScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       BigCamera(
+                        tittle: "Upload NID",
+                        subtitle: "Upload national identity card",
                         press: () {
                           bloc.add(PickImage());
                         },
