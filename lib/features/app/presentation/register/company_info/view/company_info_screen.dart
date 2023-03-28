@@ -8,6 +8,7 @@ import 'package:qbidding/core/utils/enums.dart';
 import 'package:qbidding/core/widget/big_camera.dart';
 import 'package:qbidding/core/widget/body.dart';
 import 'package:qbidding/core/widget/button.dart';
+import 'package:qbidding/core/widget/grid_view_file_image.dart';
 import 'package:qbidding/core/widget/text.dart';
 import 'package:qbidding/core/widget/text_field.dart';
 import 'package:qbidding/features/app/presentation/register/company_info/bloc/company_info_bloc.dart';
@@ -60,14 +61,14 @@ class CompanyInfoScreen extends StatelessWidget {
                       labelText: "Company Name",
                       errorText: state.forms == Forms.invalid &&
                               state.companyName.isEmpty
-                          ? 'Enter your name'
+                          ? 'Enter Company name'
                           : '',
                     ),
                     const SizedBox(height: 25),
                     TextFieldB(
                       paddingHeight: 18,
                       focusNode: companyAddressFocusnode,
-                      controller: companyNameController,
+                      controller: companyAddressController,
                       maxLines: 3,
                       onChanged: (String address) {
                         bloc.add(ChangeCompanyAddress(companyAddress: address));
@@ -75,7 +76,7 @@ class CompanyInfoScreen extends StatelessWidget {
                       labelText: "Your company address",
                       errorText: state.forms == Forms.invalid &&
                               state.companyAddress.isEmpty
-                          ? 'Enter your company address'
+                          ? 'Enter company address'
                           : '',
                     ),
                     const SizedBox(height: 25),
@@ -99,6 +100,11 @@ class CompanyInfoScreen extends StatelessWidget {
                           fontColor: bRed,
                         ),
                       ],
+                    ),
+                    GridViewFileImageB(
+                      padding: 0,
+                      crossAxisCount: 5,
+                      images: state.images,
                     ),
                     const SizedBox(height: 25),
                     ButtonB(

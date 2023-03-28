@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -131,11 +130,17 @@ class PersonalInfoScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  GridViewFileImageB(
-                    crossAxisCount: 5,
-                    images: state.images,
-                  ),
-                  const SizedBox(height: 25),
+                  if (state.images.isNotEmpty)
+                    Column(
+                      children: [
+                        GridViewFileImageB(
+                          padding: 0,
+                          crossAxisCount: 5,
+                          images: state.images,
+                        ),
+                        const SizedBox(height: 25),
+                      ],
+                    ),
                   TextFieldB(
                     paddingHeight: 18,
                     focusNode: passwordFocusnode,
